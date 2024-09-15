@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Product</title>
+  <style>
+    .image-container {
+      display: flex;
+      gap: 10px;
+    }
+    .image-container img {
+      max-width: 100px;
+      height: auto;
+    }
+    .image-container label {
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Edit Product</h1>
+  <form action="/products/<%= product._id %>" method="post" enctype="multipart/form-data">
+    <label>Name: <input type="text" name="name" value="<%= product.name %>" required></label><br><br>
+    
+    <label>Price: <input type="number" name="price" value="<%= product.price %>" required></label><br><br>
+    
+    <label>Category:
+      <select name="category">
+        <% categories.forEach(category => { %>
+          <option value="<%= category._id %>" <%= category._id.equals(product.category._id) ? 'selected' : '' %>><%= category.name %></option>
+        <% }) %>
+      </select>
+    </label><br><br>
+
+    
+    <input type="hidden" name="existingPictures" value="<%= product.pictures.join(',') %>">
+
+ 
+    <div>
+      <h3>Existing Pictures</h3>
+      <div class="image-container">
+        <% product.pictures.forEach((picture, index) => { %>
+          <div>
+            <img src="<%= picture %>" alt="Product Image">
+            <label>
+              Remove: <input type="checkbox" name="removePictures" value="<%= picture %>">
+            </label>
+          </div>
+        <% }) %>
+      </div>
+    </div><br><br>
+
+  
+    <label>New Pictures: <input type="file" name="pictures" multiple></label><br><br>
+    <button type="submit">Update</button>
+  </form>
+</body>
+</html>

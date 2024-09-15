@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Products</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow-x: auto;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 8px 12px; 
+      text-align: left;
+      font-size: 14px;
+    }
+    th {
+      background-color: #f4f4f4;
+      white-space: nowrap;
+    }
+    td {
+      white-space: nowrap; 
+    }
+    button {
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+    .image-container img {
+      max-width: 80px; 
+      height: auto;
+      margin-right: 5px;
+    }
+    
+    .table-wrapper {
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Products</h1>
+  <a href="/products/new">New Product</a>
+  <div class="table-wrapper">
+    <br>
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Pictures</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% products.forEach(product => { %>
+          <tr>
+            <td><%= product.name %></td>
+           
+            
+            <td><%= product.category ? product.category.name : 'No Category' %></td>
+            <td><%= product.price %></td>
+            <td>
+              <div class="image-container">
+                <% product.pictures.forEach(picture => { %>
+                  <img src="<%= picture %>" alt="Product Image">
+                <% }) %>
+              </div>
+            </td>
+            <td>
+              <a href="/products/<%= product._id %>/edit">Edit</a>
+              <form action="/products/<%= product._id %>/delete" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

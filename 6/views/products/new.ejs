@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Product</title>
+</head>
+<body>
+  <h1>New Product</h1>
+  <form action="/products" method="post" enctype="multipart/form-data">
+    <label>Name: <input type="text" name="name" required></label><br><br>
+   
+    <label>Price: <input type="number" name="price" required></label><br><br>
+    <label>Category:
+      <select name="category">
+        <% categories.forEach(category => { %>
+          <option value="<%= category._id %>"><%= category.name %></option>
+        <% }) %>
+      </select>
+    </label><br><br>
+    <label>Pictures: <input type="file" name="pictures" multiple></label><br><br>
+    <button type="submit">Create</button>
+  </form>
+</body>
+</html>

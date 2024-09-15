@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Categories</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      max-width: 800px; 
+      margin: 0 auto; 
+    }
+    table, th, td {
+      border: 1px solid #ddd; 
+    }
+    th, td {
+      padding: 4px 8px; 
+      text-align: left;
+      font-size: 14px; 
+    }
+    th {
+      background-color: #f4f4f4; 
+    }
+    button {
+      padding: 2px 6px; 
+      font-size: 12px; 
+    }
+  </style>
+</head>
+<body>
+  <h1>Categories</h1>
+  <a href="/categories/new">New Category</a>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% categories.forEach(category => { %>
+        <tr>
+          <td><%= category.name %></td>
+          <td>
+            <a href="/categories/<%= category._id %>/edit">Edit</a>
+            <form action="/categories/<%= category._id %>/delete" method="post" style="display:inline;">
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>
